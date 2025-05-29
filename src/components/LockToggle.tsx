@@ -57,7 +57,7 @@ const StyledLockToggle = styled.button<{ $colour?: TileColour}>`
     }
   }
 
-  &.locked {
+  &.unlocked {
     svg {
       fill: gold;
       transform: translate(0.6rem, 0.6rem);
@@ -70,12 +70,10 @@ const StyledLockToggle = styled.button<{ $colour?: TileColour}>`
   }
 `;
 
-export default function LockToggle({colour, pos, onLockClick}) {
-  const [value, setValue] = useState(false);
-
+export default function LockToggle({colour, pos, isUnlocked, onLockClick}) {
   return (
     <StyledLockToggle
-      className={`pos-${pos} ${value ? 'locked' : ''}`}
+      className={`pos-${pos} ${isUnlocked ? 'unlocked' : ''}`}
       $colour={colour}
       onClick={() => onLockClick(pos)}
     >

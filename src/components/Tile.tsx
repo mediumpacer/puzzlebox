@@ -54,7 +54,6 @@ export default function Tile({colour, pos, onTileClick}) {
       <svg viewBox="0 0 104 104" xmlns="http://www.w3.org/2000/svg">
         <polygon points={points} />
       </svg>
-      {pos}
     </StyledTile>
   );
 }
