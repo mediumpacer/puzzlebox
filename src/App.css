@@ -1,0 +1,54 @@
+
+:root {
+  --color-tile-black: #222;
+  --color-tile-blue: #1e90ff;
+  --color-tile-grey: #808080;
+  --color-tile-green: #32cd32;
+  --color-tile-orange: #ff9900;
+  --color-tile-pink: #ff69b4;
+  --color-tile-purple: #8e00cb;
+  --color-tile-red: #ff4500;
+  --color-tile-white: #f8f8f8;
+  --color-tile-yellow: #eaea00;
+
+  --color-bg: #edc;
+  --color-tile-border: #333;
+  --color-board-bg: #ae907a;
+
+}
+
+
+html {
+  font-size: 62.5%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--color-text);
+  background: var(--color-background);
+  line-height: 1.6;
+  font-family: Roboto, sans-serif;
+  font-size: 1.6rem;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: greyscale;
+  background: var(--color-bg);
+}
+
+#root {
+  max-width: 128rem;
+  height: 90vh;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
