@@ -45,10 +45,15 @@ body {
 
 #root {
   max-width: 128rem;
-  height: 90vh;
+  min-height: 90vh;
   margin: 0 auto;
   padding: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+
+strong {
+  font-weight: bold;
 }

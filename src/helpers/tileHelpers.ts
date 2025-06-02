@@ -55,7 +55,6 @@ export const getSurroundingTiles = (pos: number) => {
 export const calculateTileChange = (pos: number, tiles: TileColour[], colourOverride: null | TileColour = null) => {
   let nextTiles = tiles.slice();
   const tileColour = colourOverride ? colourOverride : nextTiles[pos];
-  console.log('tileColour', tileColour, pos);
   const adjacentTiles = getAdjacentTiles(pos);
 
   switch (tileColour) {

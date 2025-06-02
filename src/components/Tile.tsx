@@ -17,7 +17,7 @@ const StyledTile = styled.button<{ $colour?: TileColour}>`
     stroke-linecap: round;
     stroke: var(--color-tile-border);
     filter: drop-shadow(0.4rem 0.4rem rgba(0,0,0, 0.2));
-    transition: filter 0.15s ease-in-out, transform 0.15s ease-in-out, fill 0.15s ease-in-out;
+    transition: filter 0.15s ease-in-out, transform 0.15s ease-in-out, fill 0.1s ease-in-out;
   }
 
   &:hover {

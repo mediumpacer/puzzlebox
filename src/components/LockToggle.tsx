@@ -1,6 +1,5 @@
 
 import styled from 'styled-components';
-import { useState } from 'react';
 import type { TileColour } from '../types/tiles';
 
 const StyledLockToggle = styled.button<{ $colour?: TileColour}>`
