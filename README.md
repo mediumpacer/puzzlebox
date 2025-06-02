@@ -1,6 +1,10 @@
 # Puzzle Box game
 This is a puzzle box game heavily inspired by the Mora Jai boxes from the computer game Blue Prince
 
+View the project online here:
+
+https://puzzlebox.lclancyau.workers.dev/
+
 
 ## Local Project Setup
 
