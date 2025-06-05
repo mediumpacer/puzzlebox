@@ -1,6 +1,6 @@
 
 import './App.css';
-import TileBoard from './components/TileBoard';
+import PuzzleBox from './components/PuzzleBox';
 import Explainers from './components/Explainers';
 
 
@@ -26,7 +26,7 @@ function App() {
     <>
       <AppContainer>
         <h1>Puzzle Box</h1>
-        <TileBoard />
+        <PuzzleBox />
         <Explainers />
       </AppContainer>
     </>

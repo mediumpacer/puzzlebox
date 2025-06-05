@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import Tile from './Tile';
 import LockToggle from './LockToggle';
-import { type TileColour, TileColours } from '../types/tiles';
+import { type TileColour } from '../types/tiles';
 import { calculateTileChange } from '../helpers/tileHelpers.ts'
 
 const StyledTileBoardContainer = styled.div`
@@ -68,56 +68,12 @@ const StyledTileBoard = styled.div`
   z-index: 30;
 `;
 
-export default function TileBoard() {
-  // Game 1 - grey corners win
-  // const defaultBoard = [
-  //   TileColours.GREY, TileColours.GREEN, TileColours.GREY,
-  //   TileColours.ORANGE, TileColours.RED, TileColours.ORANGE,
-  //   TileColours.WHITE, TileColours.GREEN, TileColours.BLACK
-  // ];
-
-  // Game 2 - yello corners win
-  const defaultBoard = [
-    TileColours.PINK, TileColours.GREY, TileColours.GREY,
-    TileColours.GREY, TileColours.YELLOW, TileColours.YELLOW,
-    TileColours.GREY, TileColours.YELLOW, TileColours.YELLOW
-  ];
-
-  // const defaultBoard = [
-  //   TileColours.BLUE, TileColours.PURPLE, TileColours.PURPLE,
-  //   TileColours.PURPLE, TileColours.BLACK, TileColours.RED,
-  //   TileColours.GREEN, TileColours.WHITE, TileColours.BLACK
-  // ];
-
-  const defaultLocks = [
-    {
-      isUnlocked: false,
-      colour: TileColours.YELLOW
-    },
-    {
-      isUnlocked: false,
-      colour: TileColours.YELLOW
-    },
-    {
-      isUnlocked: false,
-      colour: TileColours.YELLOW
-    },
-    {
-      isUnlocked: false,
-      colour: TileColours.YELLOW
-    },
-  ];
-
-  interface TileLock {
-    isUnlocked: Boolean;
-    colour: TileColour;
-  };
-
-  const [tiles, setTiles] = useState<TileColour[]>(defaultBoard);
-  const [locks, setLocks] = useState<TileLock[]>(defaultLocks);
+export default function TileBoard({game}) {
+  const [tiles, setTiles] = useState<TileColour[]>([game.tiles]);
+  const [locks, setLocks] = useState<boolean[]>([false, false, false, false]);
   const [boardUnlocked, setBoardUnlocked] = useState(false);
 
-  const handlTileClick = (pos: number) => {
+  const handleTileClick = (pos: number) => {
     if (boardUnlocked) return;
     const newTiles = calculateTileChange(pos, tiles);
     setTiles(newTiles);
@@ -125,16 +81,16 @@ export default function TileBoard() {
 
   const checkLockState = (pos) => {
     const lockTileRef = [0, 2, 6, 8];
-    return (locks[pos].colour === tiles[lockTileRef[pos]]);
+    return (game.locks[pos] === tiles[lockTileRef[pos]]);
   };
 
   const handleLockClick = (pos: number) => {
     if (boardUnlocked) return;
     let newLocks = locks.slice();
     if (checkLockState(pos)) {
-      newLocks[pos].isUnlocked = true;
+      newLocks[pos] = true;
     } else {
-      newLocks = defaultLocks;
+      newLocks = [false, false, false, false];
       resetTiles();
     }
     setLocks(newLocks);
@@ -142,7 +98,7 @@ export default function TileBoard() {
 
   // Check if all locks are unlocked and then if so open the board / win
   const checkAllUnlocked = () => {
-    const isAllUnlocked = locks.every(lock => lock.isUnlocked);
+    const isAllUnlocked = locks.every(lock => lock === true);
     if (isAllUnlocked) setBoardUnlocked(true);
   };
 
@@ -151,17 +107,15 @@ export default function TileBoard() {
   const checkUnlockedLocks = () => {
     const newLocks = locks.slice();
     locks.forEach((lock, index) => {
-      if (!lock.isUnlocked) return;
-
       if (!checkLockState(index)) {
-        newLocks[index].isUnlocked = false;
+        newLocks[index] = false;
       }
     });
     setLocks(newLocks);
   };
 
   const resetTiles = () => {
-    setTiles(defaultBoard);
+    setTiles(game.tiles);
   }
 
   useEffect(() => {
@@ -172,10 +126,18 @@ export default function TileBoard() {
     checkAllUnlocked();
   }, [locks]);
 
+
+  useEffect(() => {
+    setTiles(game.tiles);
+    setLocks([false, false, false, false]);
+    setBoardUnlocked(false);
+  }, [game]);
+
+
   return (
     <StyledTileBoardContainer className={`${boardUnlocked ? 'unlocked' : ''}`}>
-      {locks.map(function(lock, index){
-        return <LockToggle colour={lock.colour} pos={index} key={index} isUnlocked={lock.isUnlocked} onLockClick={handleLockClick}></LockToggle>;
+      {game.locks.map(function(lock, index){
+        return <LockToggle colour={lock} pos={index} key={index} isUnlocked={locks[index]} onLockClick={handleLockClick}></LockToggle>;
       })}
       <div className="styled-tile-board__inner">
         <div className="box box__top">
@@ -185,7 +147,7 @@ export default function TileBoard() {
         </div>
         <StyledTileBoard className="styled-tile-board__board">
           {tiles.map(function(tileColour, index){
-            return <Tile colour={tileColour} pos={index} key={index} onTileClick={handlTileClick}></Tile>;
+            return <Tile colour={tileColour} pos={index} key={index} onTileClick={handleTileClick}></Tile>;
           })}
         </StyledTileBoard>
         <div className="box box__bottom">

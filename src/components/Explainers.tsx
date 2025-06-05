@@ -37,7 +37,7 @@ const ExplainerColumn = styled.div`
   }
 `;
 
-const ExplainerTile = styled.div<{ $colour?: TileColour}>`
+const ExplainerTile = styled.div<{ $colour?: TileColour }>`
   background: ${props => props.$colour ? `var(--color-tile-${props.$colour})` : 'transparent'};
   width: 3rem;
   height: 3rem;

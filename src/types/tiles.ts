@@ -11,4 +11,4 @@ export const TileColours = {
   YELLOW: 'yellow',
 } as const;
 
-export type TileColour = typeof TileColours[keyof typeof TileColours]
+export type TileColour = typeof TileColours[keyof typeof TileColours];
