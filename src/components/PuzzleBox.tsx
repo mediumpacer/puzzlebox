@@ -18,7 +18,7 @@ export default function PuzzleBox() {
 
   return (
     <>
-    <GameSelector games={gameData} onSelectClick={handleSelectClick}/>
+    <GameSelector games={gameData} currentGameId={currentGame.id} onSelectClick={handleSelectClick}/>
     <TileBoard game={currentGame} />
     </>
   );

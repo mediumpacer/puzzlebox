@@ -12,9 +12,11 @@
   --color-tile-yellow: #eaea00;
 
   --color-bg: #edc;
+  --color-card-bg: #fcfcfc;
   --color-tile-border: #333;
+  --color-tile-border-active: #e9c62b;
+  --color-tile-border-inactive: #e0e0e0;
   --color-board-bg: #ae907a;
-
 }
 
 

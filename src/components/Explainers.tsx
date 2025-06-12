@@ -15,7 +15,7 @@ const ExplainerContainer = styled.div`
 `;
 
 const ExplainerColumn = styled.div`
-  background: #fcfcfc;
+  background: var(--color-card-bg);
   border-radius: 1.6rem;
   padding: 2rem;
 
