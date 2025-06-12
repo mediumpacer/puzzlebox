@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import type { TileColour } from '../types/tiles';
 
 const StyledLockToggle = styled.button<{ $colour?: TileColour}>`
+  --lock-distance: max(-10vw, -8rem);
+
   background: none;
   border: none;
   cursor: pointer;
@@ -13,20 +15,20 @@ const StyledLockToggle = styled.button<{ $colour?: TileColour}>`
   z-index: 100;
 
   &.pos-0 {
-    top: 0;
-    left: 0;
+    top: var(--lock-distance);
+    left: var(--lock-distance);
   }
   &.pos-1 {
-    top: 0;
-    right: 0;
+    top: var(--lock-distance);
+    right: var(--lock-distance);
   }
   &.pos-2 {
-    bottom: 0;
-    left: 0;
+    bottom: var(--lock-distance);
+    left: var(--lock-distance);
   }
   &.pos-3 {
-    bottom: 0;
-    right: 0;
+    bottom: var(--lock-distance);
+    right: var(--lock-distance);
   }
 
   & > svg {

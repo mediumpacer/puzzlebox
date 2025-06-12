@@ -11,13 +11,13 @@ const ExplainerContainer = styled.div`
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
   }
-
 `;
 
 const ExplainerColumn = styled.div`
   background: var(--color-card-bg);
   border-radius: 1.6rem;
   padding: 2rem;
+  filter: drop-shadow(0.6rem 0.6rem rgba(0,0,0, 0.2));
 
   h2 {
     text-align: center;

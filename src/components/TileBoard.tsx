@@ -6,12 +6,12 @@ import { type TileColour } from '../types/tiles';
 import { calculateTileChange } from '../helpers/tileHelpers.ts'
 
 const StyledTileBoardContainer = styled.div`
-  padding: clamp(4rem, 8vw, 8rem);
-  width: clamp(24rem, 50vw, 64rem);
+padding: clamp(3rem, 6vw, 8rem);
+  width: clamp(32rem, 50vw, 64rem);
   position: relative;
 
   .styled-tile-board__inner {
-    padding: clamp(2rem, 3vw, 4rem);
+    /* padding: clamp(2rem, 3vw, 4rem); */
     position: relative;
 
     .box {
@@ -33,7 +33,6 @@ const StyledTileBoardContainer = styled.div`
 
       &__top {
         z-index: 20;
-        transition: transform 2s ease-in-out;
       }
 
       &__bottom {
@@ -46,15 +45,16 @@ const StyledTileBoardContainer = styled.div`
     }
   }
 
-  .box__top,
-  .styled-tile-board__board {
-      transition: transform 2s ease-in-out;
+  .styled-tile-board__anim {
+    position: relative;
+    z-index: 20;
+    padding: clamp(2rem, 3vw, 4rem);
+    transition: transform 1.4s ease-in-out;
   }
 
   &.unlocked {
-    .box__top,
-    .styled-tile-board__board {
-      transform: translateY(-10rem);
+    .styled-tile-board__anim {
+      transform: translate(-5rem, -5rem) rotate(-10deg);
     }
   }
 `;
@@ -136,20 +136,24 @@ export default function TileBoard({game}) {
 
   return (
     <StyledTileBoardContainer className={`${boardUnlocked ? 'unlocked' : ''}`}>
-      {game.locks.map(function(lock, index){
-        return <LockToggle colour={lock} pos={index} key={index} isUnlocked={locks[index]} onLockClick={handleLockClick}></LockToggle>;
-      })}
+
       <div className="styled-tile-board__inner">
-        <div className="box box__top">
-          <svg viewBox="0 0 104 104" xmlns="http://www.w3.org/2000/svg">
-            <polygon points="12,2 92,2 102,12 102,92 92,102 12,102 2,92 2,12" />
-          </svg>
-        </div>
-        <StyledTileBoard className="styled-tile-board__board">
-          {tiles.map(function(tileColour, index){
-            return <Tile colour={tileColour} pos={index} key={index} onTileClick={handleTileClick}></Tile>;
+        <div className="styled-tile-board__anim">
+          {game.locks.map(function(lock, index){
+            return <LockToggle colour={lock} pos={index} key={index} isUnlocked={locks[index]} onLockClick={handleLockClick}></LockToggle>;
           })}
-        </StyledTileBoard>
+          <div className="box box__top">
+            <svg viewBox="0 0 104 104" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="12,2 92,2 102,12 102,92 92,102 12,102 2,92 2,12" />
+            </svg>
+          </div>
+
+          <StyledTileBoard className="styled-tile-board__board">
+            {tiles.map(function(tileColour, index){
+              return <Tile colour={tileColour} pos={index} key={index} onTileClick={handleTileClick}></Tile>;
+            })}
+          </StyledTileBoard>
+        </div>
         <div className="box box__bottom">
           <svg viewBox="0 0 104 104" xmlns="http://www.w3.org/2000/svg">
             <polygon points="12,2 92,2 102,12 102,92 92,102 12,102 2,92 2,12" />
